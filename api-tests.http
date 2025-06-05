@@ -1,0 +1,66 @@
+### Get Workloads
+GET http://localhost:7777/workloads
+
+
+### Add Workload
+POST http://localhost:7777/workloads HTTP/1.1
+Host: localhost:7777
+Content-Type: application/json
+
+{
+"ip": "192.168.1.100",
+"credentials": { "username": "admin", "password": "1234", "domain": "corp" },
+"storage": [{ "name": "C:\\", "total_size": 100 }, { "name": "D:\\", "total_size": 200 }]
+}
+
+### Modify Workload
+PUT http://localhost:7777//workloads/192.168.1.100 HTTP/1.1
+Host: localhost:7777
+Content-Type: application/json
+
+{
+  "credentials": {
+    "username": "admin",
+    "password": "111",
+    "domain": "hello.world"
+  },
+  "storage": [
+    { "name": "C:\\\\", "total_size": 777 },
+    { "name": "D:\\\\", "total_size": 111 }
+  ]
+}
+
+### Delete Workload
+DELETE http://localhost:7777/workloads/192.168.1.100
+
+### Get Migrations
+GET http://localhost:7777/migrations
+
+### Add Migration
+POST http://localhost:7777/migrations HTTP/1.1
+Host: localhost:7777
+Content-Type: application/json
+
+{
+"selected_mount_points": ["C:\\"],
+"source_ip": "192.168.1.100",
+"target": {
+"cloud_type": "aws",
+"cloud_credentials": { "username": "admin", "password": "1234", "domain": "corp" },
+"target_vm": {
+"ip": "10.0.0.5",
+"credentials": { "username": "admin", "password": "1234", "domain": "corp" },
+"storage": []
+}
+}
+}
+
+### Modify Migration
+PUT http://localhost:7777/migrations/192.168.1.100
+
+### Delete Migration
+DELETE http://localhost:7777/migrations/192.168.1.100
+
+### Run Migration
+POST http://localhost:7777/migrations/192.168.1.100/run
+
